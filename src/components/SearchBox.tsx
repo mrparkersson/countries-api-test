@@ -61,15 +61,14 @@ const SearchBox: React.FC<SearchBoxProps> = ({ suggestions }) => {
   useEffect(() => {
     const handler = setTimeout(() => {
       if (query) {
-        setFilteredSuggestions(
-          suggestions
-            .filter((suggestion) =>
-              suggestion.toLowerCase().includes(query.toLowerCase())
-            )
-            .slice(0, 5)
-        );
+        const filtered = suggestions
+          .filter((suggestion) =>
+            suggestion.toLowerCase().includes(query.toLowerCase())
+          )
+          .slice(0, 5);
+        setFilteredSuggestions(filtered);
       } else {
-        setFilteredSuggestions([]);
+        setFilteredSuggestions(suggestions.slice(0, 5));
       }
     }, 250);
 
